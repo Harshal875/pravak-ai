@@ -7,6 +7,12 @@ import { ConvexProvider, ConvexReactClient } from "convex/react"
 
 const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL || "")
 
+/**
+ * Wraps children with a ConvexProvider using the module-level Convex client.
+ *
+ * @param props - Additional NextThemesProvider props are accepted but ignored.
+ * @returns A React element that renders `children` inside a configured ConvexProvider.
+ */
 function ThemeProvider({
   children,
   ...props

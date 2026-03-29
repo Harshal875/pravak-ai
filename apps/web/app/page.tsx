@@ -4,6 +4,11 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "@workspace/backend/_generated/api";
 import { Button } from "@workspace/ui/components/button";
 
+/**
+ * Client page component that fetches and displays users and provides a button to add a user.
+ *
+ * @returns A React element rendering a centered column with an "apps/web" label, an "Add" button that invokes the user creation mutation, and a JSON-formatted view of the current users query result.
+ */
 export default function Page() {
   const users = useQuery(api.users.getMany);
   const addUser = useMutation(api.users.add); 

@@ -14,10 +14,10 @@ if (!process.env.NEXT_PUBLIC_CONVEX_URL) {
 const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL || "")
 
 /**
- * Wraps children with a ConvexProvider using the module-level Convex client.
+ * Wraps `children` with a ConvexProviderWithClerk configured with the module-level Convex client.
  *
- * @param props - Additional NextThemesProvider props are accepted but ignored.
- * @returns A React element that renders `children` inside a configured ConvexProvider.
+ * @param props - Additional NextThemesProvider props are accepted but ignored by this component.
+ * @returns The `children` React node wrapped by the Convex provider (using Clerk authentication).
  */
 function ThemeProvider({
   children,
@@ -43,6 +43,15 @@ function isTypingTarget(target: EventTarget | null) {
   )
 }
 
+/**
+ * Registers a global "D" keyboard shortcut to toggle the site's theme between dark and light.
+ *
+ * The shortcut is ignored when the event is defaultPrevented, is a repeated key event, includes
+ * Meta/Ctrl/Alt modifiers, or originates from a typing-capable element (input, textarea, select,
+ * content-editable). The listener is attached on mount and removed on unmount.
+ *
+ * @returns `null` (the component does not render any DOM)
+ */
 function ThemeHotkey() {
   const { resolvedTheme, setTheme } = useTheme()
 

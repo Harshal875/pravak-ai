@@ -5,6 +5,14 @@ import { useMutation, useQuery, Authenticated, Unauthenticated } from "convex/re
 import { api } from "@workspace/backend/_generated/api";
 import { Button } from "@workspace/ui/components/button";
 
+/**
+ * Client React page component that renders an auth-gated user interface.
+ *
+ * When authenticated, the component shows the app label, a user menu, an "Add" button that triggers the `users.add` mutation, and a JSON view of users from `users.getMany`.
+ * When unauthenticated, it shows a sign-in prompt and a sign-in button.
+ *
+ * @returns A React element containing the authenticated view (user controls and list) or the unauthenticated sign-in prompt.
+ */
 export default function Page() {
   const users = useQuery(api.users.getMany);
   const addUser = useMutation(api.users.add);

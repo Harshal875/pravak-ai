@@ -12,6 +12,12 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
+/**
+ * Root layout component that provides Clerk authentication and theme context for the application.
+ *
+ * @param children - The React nodes to render inside the layout.
+ * @returns The root `<html>` element containing a `<body>` whose contents are wrapped with Clerk and theme providers around `children`.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

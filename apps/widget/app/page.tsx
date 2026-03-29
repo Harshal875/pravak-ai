@@ -1,21 +1,26 @@
-import { Button } from "@workspace/ui/components/button"
-import {Input} from "@workspace/ui/components/input"
+"use client";
 
+import { useMutation, useQuery } from "convex/react";
+import { api } from "@workspace/backend/_generated/api";
+import { Button } from "@workspace/ui/components/button";
 
+/**
+ * Client-side page that fetches a list of users, provides an "Add" button to invoke the add-user mutation, and displays the fetched users as formatted JSON.
+ *
+ * @returns The component's JSX element containing the controls and the users display.
+ */
 export default function Page() {
+  const users = useQuery(api.users.getMany);
+  const addUser = useMutation(api.users.add);
+
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="text-muted-foreground font-mono text-xs">
-          (Press <kbd>d</kbd> to toggle dark mode)
-          <Input />
-        </div>
+    <div className="flex flex-col items-center justify-center min-h-svh">
+      <p>apps/widget</p>
+      <Button onClick={() => addUser()}>
+        Add
+      </Button>
+      <div className="max-w-sm w-full mx-auto">
+        {JSON.stringify(users, null, 2)}
       </div>
     </div>
   )

@@ -2,22 +2,28 @@
 
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes"
+import { ConvexProvider, ConvexReactClient } from "convex/react"
 
+
+const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL || "")
+
+/**
+ * Provides the Convex React context to its child elements.
+ *
+ * Accepts the same props as NextThemesProvider for API compatibility, but only uses `children`.
+ *
+ * @param children - Elements that will receive the Convex context
+ * @param props - Additional NextThemesProvider-compatible props (accepted for compatibility and not forwarded)
+ * @returns The provided `children` wrapped in a ConvexProvider
+ */
 function ThemeProvider({
   children,
   ...props
 }: React.ComponentProps<typeof NextThemesProvider>) {
   return (
-    <NextThemesProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-      {...props}
-    >
-      <ThemeHotkey />
+    <ConvexProvider client={convex}>
       {children}
-    </NextThemesProvider>
+    </ConvexProvider>
   )
 }
 

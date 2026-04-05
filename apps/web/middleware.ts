@@ -12,6 +12,7 @@ const isOrgFreeRoute = createRouteMatcher([
   "/org-selection(.*)"
 ]);
 
+// @ts-ignore -- duplicate next.js resolution from @sentry/nextjs causes non-portable type
 export default clerkMiddleware(async (auth, req) => {
   const { userId, orgId } = await auth();
 
@@ -29,7 +30,8 @@ export default clerkMiddleware(async (auth, req) => {
 
     return NextResponse.redirect(orgSelection);
   }
-});
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+}) as any;
 
 export const config = {
   matcher: [

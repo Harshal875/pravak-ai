@@ -3,7 +3,7 @@ import { cn } from "@workspace/ui/lib/utils"
 import { HomeIcon, InboxIcon } from "lucide-react"
 
 export const WidgetFooter = () => {
-  const screen: "selection" | "inbox" = "selection";
+  const screen = "selection";
 
   return (
     <footer className="flex items-center justify-between border-t bg-background">
@@ -24,7 +24,7 @@ export const WidgetFooter = () => {
         variant="ghost"
       >
         <InboxIcon
-          className={cn("size-5", screen === "inbox" && "text-primary")}
+          className={cn("size-5")}
         />
       </Button>
     </footer>
